@@ -119,23 +119,29 @@
 
 \section{Modeling and Evaluation}
 
-\paragraph{Methodologies Logistic Regression, Random Forest, and K Nearest Neighbor were implemented to predict separation types amongst our sampled professional occupations. Principal Component Analysis (PCA) was utilized in attempts to reduce dimensionality in our initial input of 99 attributes. Ultimately, [INSERT MODEL NAME HERE ONCE DONE WITH ANALYSIS] produced most effective results and the generated model was applied to a different demographic of Administrative occupations.}
+\paragraph{Methodologies Logistic Regression, Random Forest, and K Nearest Neighbor(KNN) were implemented to predict separation types amongst our sampled professional occupations. Four disparate feature input selections were utilized in attempts to reduce dimensionality in our initial input of 99 attributes. Ultimately, Logistic Regression produced most effective trained results and the generated models were applied to a different demographic of Administrative occupations.}
  
-\subsection{Dimensionality Reduction and Class Weights}
+\subsection{Feature Input Selections}
 
-\paragraph{Principal component analysis was performed on our professional occupation samples in attempts to reduce our 99 input attributes. As can be seen in Fig. 4, the percentage of explained variance leveled out around 22 components, at which point cumulative explained variance approached 80\%.}
+\paragraph{Four feature input selections were made during the modeling process in search of the best features for each model type individually. Selections made were: 1) Full 99 Raw Scaled Value Features; 2) Principal Component Analysis(PCA) Eigenvector Matrix; 3) Top 15 Raw Scaled Features within Each PCA Loading; 4) Manual Logistic Regression Feature Selection.}
 
-\begin{figure}
-\caption{Fig. 4. Explained and Cumulative Variance Plots}
+\subparagraph{Full 99 Raw Scaled Value Features: All 99 values after Min Max Scaling was performed.}
+
+\subparagraph{Principal Component Analysis(PCA) Eigenvector Matrix: Principal component analysis was performed on our professional occupation samples in attempts to reduce our 99 input attributes. As can be seen in Figure \ref{fig:PCA_Scree_CumVar}, the percentage of explained variance leveled out around 22 components, at which point cumulative explained variance approached 80\%.}
+
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{PCA_Scree_CumVar.jpg}
+\caption{Explained and Cumulative Variance Plots}
+\label{fig:PCA_Scree_CumVar}
 \end{figure}
 
-\subparagraph{These 22 principal components were utilized both as a dataset of component vectors as well as to identify the top 10 features within each of the 22 components. The latter approach reduced our inputs by nearly 50\%, allowing only the most important features to proceed into our model, based on PCA component loadings.}
- 
-\subparagraph{Even after stratified sampling initiatives were complete, significant variance was still present in the distribution across separation classes. Balanced weights, as indicated in Table 1, were applied to account for classes with smaller populations.}
 
-\begin{figure}
-\caption{Table 1. Separation Strata Weight}
-\end{figure}
+\subparagraph{These 22 principal components were utilized both as a dataset of component vectors as well as to identify the top 15 features within each of the 22 components. The latter approach reduced our inputs to 49 features, allowing only the most important features to proceed into our model as raw scaled values, based on PCA component loadings.}
+
+\subparagraph{Manual Logistic Regression Feature Selection: I want Chris to write a paragraph on this process, what values are analyzed{P Values, VIF, etc.}, and thresholds for removal.}
+ 
 
 \subsection{Classification Model Training and Comparison}
 
@@ -144,7 +150,9 @@
 \begin{figure}
 \caption{Fig. 5. Confusion Matrix of Final Results}
 \end{figure}
- 
+
+\subsection{Feature Importance Analysis}
+
 \subsection{Expanding Testing Scope to Administrative Occupations}
 
 \paragraph{[TEXT PLACEHOLDER FOR RESULTS, APPLYING FINAL MODEL ON ADMINISTRATIVE DATA. INCLUDE COMMENTS ON HOW ONE MODEL DOES OR DOES NOT WORK WELL ACROSS INDUSTRIES. ALSO, PROVIDE RESULTS ON EFFECTIVENESS OF THE MODEL, WHEN OCCUPATION FAMILIES ARE INCLUDED AND A SEPARATE MODEL IS GENERATED FOR EACH POPULATION SEGMENT].}
