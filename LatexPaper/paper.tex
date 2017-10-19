@@ -130,7 +130,7 @@
 
 \subparagraph{Full 99 Raw Scaled Value Features: All 99 values after Min Max Scaling was performed.}
 
-\subparagraph{Principal Component Analysis(PCA) Eigenvector Matrix: Principal component analysis was performed on our professional occupation samples in attempts to reduce our 99 input attributes. As can be seen in Figure \ref{fig:PCA_Scree_CumVar}, the percentage of explained variance leveled out around 22 components, at which point cumulative explained variance approached 80\%.}
+\subparagraph{Principal Component Analysis(PCA) Eigenvector Matrix: Principal component analysis was performed on our professional occupation samples in attempts to reduce our 99 input attributes. As can be seen in Figure ~\ref{fig:PCA_Scree_CumVar}, the percentage of explained variance leveled out around 22 components, at which point cumulative explained variance approached 80\%.}
 
 \subparagraph{}
 \begin{figure}[H]
@@ -143,22 +143,59 @@
 
 \subparagraph{These 22 principal components were utilized both as a dataset of component vectors as well as to identify the top 15 features within each of the 22 component loading magnitudes. The latter approach reduced our inputs to 49 features, allowing only the most important features to proceed into our model as raw scaled values, based on PCA component loadings.}
 
-\subparagraph{Manual Logistic Regression Feature Selection: I want Chris to write a paragraph on this process, what values are analyzed{P Values, VIF, etc.}, and thresholds for removal.}
+\subparagraph{Manual Logistic Regression Feature Selection:[CHRIS TO WRITE A PARAGRAPH ON THIS PROCESS, WHAT VALUES ARE ANALYZED{P VALUE, VIF, ETC.}, AND THRESHOLDS FOR REMOVAL.]
+}
  
 
 \subsection{Classification Model Training and Comparison}
 
-\paragraph{Of the three models generated, [INSERT MODEL NAME HERE ONCE DONE WITH ANALYSIS] was identified as most effective due to [INSERT STATISTICAL SIGNIFICANCE DETAILS HERE]. As depicted in Fig. 5, [INSERT INTERPRETATION OF CONFUSION MATRIX HERE, AS VALUES WILL CHANGE AS WE TEST MUTLIPLE MODELS].}
- 
-\begin{figure}
-\caption{Fig. 5. Confusion Matrix of Final Results}
+\paragraph{[DISCUSS CV SPLIT FOLDS HERE.....]}
+
+\subparagraph{Among the three model types and four separate input features tested, Logistic Regression with Manual Feature Selection was identified as most effective. As depicted in Table ~\ref{fig:AccTable} the [INTERPRET MODEL MEAN ACCURACY RESULTS HERE]} 
+
+\subparagraph{}
+\begin{table}[H]
+\centering
+\caption{Raw Accuracy Data for Top 4 Model Results}
+\includegraphics[width=\linewidth]{AccTable.jpg}
+\label{fig:AccTable}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{AccPlot.jpg}
+\caption{Accuracies Across Test Folds for Top 4 Model Results}
+\label{fig:AccPlot}
+\end{figure}
+
+\subparagraph{Furthermore, we may see visually in Figure ~\ref{fig:AccPlot}, the variation in accuracy for each model across the 5 fold tests further supports the Logistic Regression results as a strong selection.[INTERPRET FOLD ACCURACY METRICS HERE, MAKING NOTE THAT LEGEND INDEXES CORRESPOND TO Table ~\ref{fig:AccTable}]}
+
+\subparagraph{[discuss lr roc plot here.....Figure ~\ref{fig:ROCPlot}.]}
+
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{ROCPlot.jpg}
+\caption{Accuracies Across Test Folds for Top 4 Model Results}
+\label{fig:ROCPlot}
 \end{figure}
 
 \subsection{Feature Importance Analysis}
 
+\paragraph{[CHRIS TO PLACE TEXT HERE.]}
+
+
 \subsection{Expanding Testing Scope to Administrative Occupations}
 
-\paragraph{[TEXT PLACEHOLDER FOR RESULTS, APPLYING FINAL MODEL ON ADMINISTRATIVE DATA. INCLUDE COMMENTS ON HOW ONE MODEL DOES OR DOES NOT WORK WELL ACROSS INDUSTRIES. ALSO, PROVIDE RESULTS ON EFFECTIVENESS OF THE MODEL, WHEN OCCUPATION FAMILIES ARE INCLUDED AND A SEPARATE MODEL IS GENERATED FOR EACH POPULATION SEGMENT].}
+\paragraph{[TEXT PLACEHOLDER FOR RESULTS, APPLYING FINAL MODEL ON ADMINISTRATIVE DATA. INCLUDE COMMENTS ON HOW ONE MODEL DOES OR DOES NOT WORK WELL ACROSS INDUSTRIES. ALSO, PROVIDE RESULTS ON EFFECTIVENESS OF THE MODEL, WHEN OCCUPATION FAMILIES ARE INCLUDED AND A SEPARATE MODEL IS GENERATED FOR EACH POPULATION SEGMENT]. Here is a reference to confus matrix... Figure ~\ref{fig:AdminLRConfus}}
+
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{AdminLRConfus.jpg}
+\caption{Confusion Matrix Results for Predicting Administrative Occupations Results}
+\label{fig:AdminLRConfus}
+\end{figure}
 
 \section{External Validation}
 
