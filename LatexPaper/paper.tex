@@ -12,6 +12,8 @@
 \begin{document}
 
 \title{Employee Attrition: What makes an employee leave?}
+\begin{center}
+
 \author{
 	Christopher Boomhower$^1$
 	\and
@@ -27,14 +29,22 @@
 }
 \date{}
 \maketitle{}
+\end{center}
 
-\paragraph{$^1$ Southern Methodist University, Dallas, TX, US\\$^2$ Penn Mutual Life Insurance Co, Horsham PA}
+\begin{center}
+{$^1$ Southern Methodist University, Dallas, TX, US\\$^2$ Penn Mutual Life Insurance Co, Horsham PA}
+\end{center}
 
-\section{Abstract}
+%definition of quote with addition of [\textbf{Abstract --- ]
+\renewenvironment{abstract}
+               {\list{}{\rightmargin\leftmargin}%
+                \item[\textbf{\hspace{10mm}Abstract ---}]\relax}
+               {\endlist}
 
-\paragraph{Abstract.  In this paper, we present a model for employee attrition prediction and discuss the ethical impacts of using such a model within private and public sector organizations. As it is in Human Resource personnel’s best interest to improve retention, implementing statistical and machine learning techniques is the most viable means to attrition abatement. To this end, we examine Office of Personnel Management public sector, Bureau of Labor Statistics public sector, and IBM anonymized private sector employee separation data. Three classification models (Methodologies include Logistic Regression, Random Forest, and K Nearest Neighbor) are trained and tested on these data before selecting our best fit model for attrition prediction. We finally use metrics such as Gini and Permutation Importance to identify the most impactful variables in determining prediction outcome before presenting the ethical ramifications of using such outputs in HR planning. [WILL ADD SENTENCE FOR MAIN RESULT AND SENTENCE FOR MAIN CONCLUSION ONCE THESE DEVELOPMENTS ARE COMPLETE].}
 
-\newpage{}
+
+\begin{abstract}\noindent In this paper, we present a model for employee attrition prediction and discuss the ethical impacts of using such a model within private and public sector organizations. As it is in Human Resource personnel’s best interest to improve retention, implementing statistical and machine learning techniques is the most viable means to attrition abatement. To this end, we examine Office of Personnel Management public sector, Bureau of Labor Statistics public sector, and IBM anonymized private sector employee separation data. Three classification models (Methodologies include Logistic Regression, Random Forest, and K Nearest Neighbor) are trained and tested on these data before selecting our best fit model for attrition prediction. We finally use metrics such as Gini and Permutation Importance to identify the most impactful variables in determining prediction outcome before presenting the ethical ramifications of using such outputs in HR planning. [WILL ADD SENTENCE FOR MAIN RESULT AND SENTENCE FOR MAIN CONCLUSION ONCE THESE DEVELOPMENTS ARE COMPLETE].\end{abstract}
+
  
 \section{Introduction}
 
