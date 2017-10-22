@@ -28,13 +28,20 @@
 \date{}
 \maketitle{}
 
-\paragraph{$^1$ Southern Methodist University, Dallas, TX, US\\$^2$ Penn Mutual Life Insurance Co, Horsham PA}
+\begin{center}
+{$^1$ Southern Methodist University, Dallas, TX, US\\$^2$ Penn Mutual Life Insurance Co, Horsham PA}
+\end{center}
 
-\section{Abstract}
+%definition of quote with addition of [\textbf{Abstract --- ]
+\renewenvironment{abstract}
+               {\list{}{\rightmargin\leftmargin}%
+                \item[\textbf{\hspace{10mm}Abstract ---}]\relax}
+               {\endlist}
 
-\paragraph{Abstract.  In this paper, we present a model for employee attrition prediction and discuss the ethical impacts of using such a model within private and public sector organizations. As it is in Human Resource personnel’s best interest to improve retention, implementing statistical and machine learning techniques is the most viable means to attrition abatement. To this end, we examine Office of Personnel Management public sector, Bureau of Labor Statistics public sector, and IBM anonymized private sector employee separation data. Three classification models (Methodologies include Logistic Regression, Random Forest, and K Nearest Neighbor) are trained and tested on these data before selecting our best fit model for attrition prediction. We finally use metrics such as Gini and Permutation Importance to identify the most impactful variables in determining prediction outcome before presenting the ethical ramifications of using such outputs in HR planning. [WILL ADD SENTENCE FOR MAIN RESULT AND SENTENCE FOR MAIN CONCLUSION ONCE THESE DEVELOPMENTS ARE COMPLETE].}
 
-\newpage{}
+
+\begin{abstract}\noindent In this paper, we present a model for employee attrition prediction and discuss the ethical impacts of using such a model within private and public sector organizations. As it is in Human Resource personnel’s best interest to improve retention, implementing statistical and machine learning techniques is the most viable means to attrition abatement. To this end, we examine Office of Personnel Management public sector, Bureau of Labor Statistics public sector, and IBM anonymized private sector employee separation data. Three classification models (Methodologies include Logistic Regression, Random Forest, and K Nearest Neighbor) are trained and tested on these data before selecting our best fit model for attrition prediction. We finally use metrics such as Gini and Permutation Importance to identify the most impactful variables in determining prediction outcome before presenting the ethical ramifications of using such outputs in HR planning. [WILL ADD SENTENCE FOR MAIN RESULT AND SENTENCE FOR MAIN CONCLUSION ONCE THESE DEVELOPMENTS ARE COMPLETE].\end{abstract}
+
  
 \section{Introduction}
 
@@ -50,17 +57,13 @@
   
 \section{Attrition as Seen in Civil Service Workers}
 
-\paragraph{The U.S. Office of Personnel Management (OPM) serves as the central Human Resources department for all Federal agencies, including the management of federal agency health insurance and retirement benefits. Their oversight of policy implementation as well as being a general resource for all agency Human Resource departments makes their employment data of particular interest for this paper. OPM regularly captures a wide range of data on the millions of federal civil service workers, and we used several of their data sources that focus on attrition. These data [7], include variables such as job level, locality, salary, length of service, and basic reason for termination of employment. Important for understanding our findings in the correct context are the following points:}
+\paragraph{The U.S. Office of Personnel Management (OPM) serves as the central Human Resources department for all Federal agencies, including the management of federal agency health insurance and retirement benefits. Their oversight of policy implementation as well as being a general resource for all agency Human Resource departments makes their employment data of particular interest for this paper. OPM releases on a quarterly basis updated separation data on its over two million federal civil service workers.  We used these anonymized data sets to create a full year of separation data, spanning October 2014 - September 2015.   These data [7], include the following variables: 1) age group, captured categorically in 5 year increments (AGELVL and AGELVLT), 2) agency type and subtype information (AGYTYP, AGYTYPT, AGY, AGYT, AGYSUB, and AGYSUBT), 3) gender (GENDER and GENDERT), 4) General Schedule Grade, or equivalent, dictating salary level (GSEGRD, 5) geographical location of the employee down to the state level (LOCTYP, LOCTYPT, LOC, LOCT), 5)length of service as a government employee captured in one year increments until five years was achieved, then every five after that (LOSLVL and LOSLVLT), 6)occupation type  in regards to white or blue collar, occupation family, and in some cases, down to the particular occupation itself (i.e. "chaplain") (OCCTYP, OCCTYPT, OCCFAM, OCCFAMT, OCC, OCCT), 7) occupation category among seven main categories (i.e. "Technical" and "Clerical")(PATCO and PATCOT), 8) pay plan and grade for both GSE and non-GSE occupations (PPTYP, PPTYPT, PPGROUP, PPGROUPT, PAYPLAN, PAYPLANT, and PPGRD), 9) salary range, captured categorically starting with $<$ \$20,000 and followed in \$10,000 increments (SALLVL and SALLVLT), 10) reason for separation (SEP and SEPT), and 11) type of appointment and worschedules, denoting factors such as permanence, seasonality, and executive status (TOATYP, TOATYPT, TOA, TOAT, WSTYP, WSTYPT, WORKSCH, and WORKSCT).   }
 
-\subparagraph{October 2014 – September 2015: The date range used to filter the final dataset (one full calendar year).}
 
-\subparagraph{General Schedule Pay Scale (GS): This is the centralized pay scale used by many civil service agencies which covers the majority of white collar professionals. Whether or not a person is paid under the GS, the OPM converts the level he or she is paid under to the GS for data collection purposes. The scale numbers 1-15 and there are ten “steps” within each of those levels.}
+\subparagraph{There are certain points worth noting to understand our findings in the correct context.  The General Schedule Pay Scale is the centralized pay scale used by many civil service agencies. Whether or not a person is paid under the GS, the OPM converts the level he or she is paid under to the GS for data collection purposes. The scale numbers 1-15 and there are ten “steps” within each of those levels.  Also, to remain competitive with industry salaries, the GS operates a locality adjustment scale that adds a particular percentage to a person’s salary, based on city of occupation alone.}
 
-\subparagraph{Locality adjustments: To remain competitive with industry salaries, the GS operates a locality adjustment scale that adds a particular percentage to a person’s salary, based on city of occupation alone.}
+\subparagraph{ Also, beginning on January 1, 1987,  new civil service employees were paid under the Federal Employees Retirement System (FERS). This mix of Social Security, a Basic Benefit Plan, and a Thrift Savings Plan helps make civil service positions stand out from many current private sector jobs in terms of retention. We account for this factor in our research, taking into consideration the confounding effect this has on length of service (LOS). At the time of this paper, the pension is based on salary and length of service.}
 
-\subparagraph{Federal Employees Retirement System (FERS): Beginning on January 1, 1987, new civil employees are paid under FERS. This mix of Social Security, a Basic Benefit Plan, and a Thrift Savings Plan helps make civil service positions stand out from many current private sector jobs. We account for this factor in our research, taking into consideration the confounding effect this has on length of service (LOS). At the time of this paper, the pension is based on salary and length of service.}
-
-\subparagraph{Reasons for separation: OPM uses twelve different categorical values to capture separation data.  A full list can be found with the original dataset [22], but it is worth noting for the reader that the events recorded include disability, death, various types of transfers, and several types of retirement.}
 
 \section{OPM Data Consolidation, Sampling, \& New Attributes}
 
@@ -87,7 +90,7 @@
  
 \subsection{OPM Computed Attributes}
 
-\paragraph{Within the original OPM data, six new attributes were created through aggregation or calculation amongst various attributes: 1) SEP Count by Date \& Occupation – Total number of separations (of any type) for a given Date and Occupation; 2) SEP Count by Date \& Location – Total number of separations (of any type) for a given Date and Location; 3) Industry Average Salary – Average salary amongst non-separated employees, grouped by quarter, occupation, pay grade, and work schedule; 4) Lower Limit Age – Youngest age within each age level category; 5) Years to Retirement – Based on FERS retirement eligibility baseline of 57 years of age [8]; and 6) Salary Over/Under Industry Average – Difference between computed average salary of non-separated employees and actual salary for each observation. Note also another 1,293 observations were removed after calculating industry average salary as they had no matching non-separation observations (matched on quarter, occupation type, pay plan /grade, and work schedule), which were utilized to ensure realistic salary averages.}
+\paragraph{Six new attributes were created through aggregation or calculation: 1) SEP Count by Date \& Occupation – Total number of separations (of any type) for a given Date and Occupation; 2) SEP Count by Date \& Location – Total number of separations (of any type) for a given Date and Location; 3) Industry Average Salary – Average salary amongst non-separated employees, grouped by quarter, occupation, pay grade, and work schedule; 4) Lower Limit Age – Youngest age within each age level category; 5) Years to Retirement – Based on FERS retirement eligibility baseline of 57 years of age [8]; and 6) Salary Over/Under Industry Average – Difference between computed average salary of non-separated employees and actual salary for each observation. Note also another 1,293 observations were removed after calculating industry average salary as they had no matching non-separation observations (matched on quarter, occupation type, pay plan /grade, and work schedule), which were utilized to ensure realistic salary averages.}
  
 \subsection{Bureau of Labor Statistics Derived Attributes}
 
@@ -127,7 +130,7 @@
 
 \subparagraph{Full 99 Raw Scaled Value Features: All 99 values after Min Max Scaling was performed.}
 
-\subparagraph{Principal Component Analysis(PCA) Eigenvector Matrix: Principal component analysis was performed on our professional occupation samples in attempts to reduce our 99 input attributes. As can be seen in Figure \ref{fig:PCA_Scree_CumVar}, the percentage of explained variance leveled out around 22 components, at which point cumulative explained variance approached 80\%.}
+\subparagraph{Principal Component Analysis(PCA) Eigenvector Matrix: Principal component analysis was performed on our professional occupation samples in attempts to reduce our 99 input attributes. As can be seen in Figure ~\ref{fig:PCA_Scree_CumVar}, the percentage of explained variance leveled out around 22 components, at which point cumulative explained variance approached 80\%.}
 
 \subparagraph{}
 \begin{figure}[H]
@@ -140,22 +143,59 @@
 
 \subparagraph{These 22 principal components were utilized both as a dataset of component vectors as well as to identify the top 15 features within each of the 22 component loading magnitudes. The latter approach reduced our inputs to 49 features, allowing only the most important features to proceed into our model as raw scaled values, based on PCA component loadings.}
 
-\subparagraph{Manual Logistic Regression Feature Selection: I want Chris to write a paragraph on this process, what values are analyzed{P Values, VIF, etc.}, and thresholds for removal.}
+\subparagraph{Manual Logistic Regression Feature Selection:[CHRIS TO WRITE A PARAGRAPH ON THIS PROCESS, WHAT VALUES ARE ANALYZED{P VALUE, VIF, ETC.}, AND THRESHOLDS FOR REMOVAL.]
+}
  
 
 \subsection{Classification Model Training and Comparison}
 
-\paragraph{Of the three models generated, [INSERT MODEL NAME HERE ONCE DONE WITH ANALYSIS] was identified as most effective due to [INSERT STATISTICAL SIGNIFICANCE DETAILS HERE]. As depicted in Fig. 5, [INSERT INTERPRETATION OF CONFUSION MATRIX HERE, AS VALUES WILL CHANGE AS WE TEST MUTLIPLE MODELS].}
- 
-\begin{figure}
-\caption{Fig. 5. Confusion Matrix of Final Results}
+\paragraph{[DISCUSS CV SPLIT FOLDS HERE.....]}
+
+\subparagraph{Among the three model types and four separate input features tested, Logistic Regression with Manual Feature Selection was identified as most effective. As depicted in Table ~\ref{fig:AccTable} the [INTERPRET MODEL MEAN ACCURACY RESULTS HERE]} 
+
+\subparagraph{}
+\begin{table}[H]
+\centering
+\caption{Raw Accuracy Data for Top 4 Model Results}
+\includegraphics[width=\linewidth]{AccTable.jpg}
+\label{fig:AccTable}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{AccPlot.jpg}
+\caption{Accuracies Across Test Folds for Top 4 Model Results}
+\label{fig:AccPlot}
+\end{figure}
+
+\subparagraph{Furthermore, we may see visually in Figure ~\ref{fig:AccPlot}, the variation in accuracy for each model across the 5 fold tests further supports the Logistic Regression results as a strong selection.[INTERPRET FOLD ACCURACY METRICS HERE, MAKING NOTE THAT LEGEND INDEXES CORRESPOND TO Table ~\ref{fig:AccTable}]}
+
+\subparagraph{[discuss lr roc plot here.....Figure ~\ref{fig:ROCPlot}.]}
+
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{ROCPlot.jpg}
+\caption{Accuracies Across Test Folds for Top 4 Model Results}
+\label{fig:ROCPlot}
 \end{figure}
 
 \subsection{Feature Importance Analysis}
 
+\paragraph{[CHRIS TO PLACE TEXT HERE.]}
+
+
 \subsection{Expanding Testing Scope to Administrative Occupations}
 
-\paragraph{[TEXT PLACEHOLDER FOR RESULTS, APPLYING FINAL MODEL ON ADMINISTRATIVE DATA. INCLUDE COMMENTS ON HOW ONE MODEL DOES OR DOES NOT WORK WELL ACROSS INDUSTRIES. ALSO, PROVIDE RESULTS ON EFFECTIVENESS OF THE MODEL, WHEN OCCUPATION FAMILIES ARE INCLUDED AND A SEPARATE MODEL IS GENERATED FOR EACH POPULATION SEGMENT].}
+\paragraph{[TEXT PLACEHOLDER FOR RESULTS, APPLYING FINAL MODEL ON ADMINISTRATIVE DATA. INCLUDE COMMENTS ON HOW ONE MODEL DOES OR DOES NOT WORK WELL ACROSS INDUSTRIES. ALSO, PROVIDE RESULTS ON EFFECTIVENESS OF THE MODEL, WHEN OCCUPATION FAMILIES ARE INCLUDED AND A SEPARATE MODEL IS GENERATED FOR EACH POPULATION SEGMENT]. Here is a reference to confus matrix... Figure ~\ref{fig:AdminLRConfus}}
+
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{AdminLRConfus.jpg}
+\caption{Confusion Matrix Results for Predicting Administrative Occupations Results}
+\label{fig:AdminLRConfus}
+\end{figure}
 
 \section{External Validation}
 
