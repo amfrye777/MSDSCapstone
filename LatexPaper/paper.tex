@@ -4,6 +4,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{subfig}
 \graphicspath{ {Images/} }
 \usepackage{float}
 \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
@@ -51,13 +52,13 @@
 
 \subparagraph{The first step in gaining foresight into employee attrition is obtaining pertinent data. Companies are understandably reluctant to release the methods, proprietary or purchased, that use even anonymous data to help them in their management of human resources. Various articles allude to this challenge [4, 5, 6]. However, we identified three valid sources of Human Resources data in the forms of Office of Personnel Management data, Bureau of Labor Statistics data, and the “IBM HR Analytics Employee Attrition” dataset. All three forms were analyzed in unison to complement one another in insight and model validity.}
 
-\subparagraph{During analysis, dimensionality reduction was performed on the datasets. This was essential to reduce numerous correlating and covariant relationships present between dataset variables. Only after these relationships were addressed and the datasets simplified were the data prepared for modelling.}
+\subparagraph{During analysis, dimensionality reduction was performed on the datasets. This was essential to reduce numerous correlating and covariant relationships present between dataset variables. Only after these relationships were addressed and the datasets simplified were the data prepared for modeling.}
 
 \subparagraph{[ADD PARAGRAPH ABOUT MODELLING PHASE AS PROJECT DEVELOPMENT PROGRESSES][ADD PARAGRAPH SUMMARIZING MAIN RESULTS AS PROJECT DEVELOPMENT PROGRESSES][ADD PARAGRAPH SUMMARIZING MAIN CONCLUSIONS AS PROJECT DEVELOPMENT PROGRESSES][ADD PAPER OVERVIEW PARAGRAPH ONCE REMAINING PAPER CONTENT FILLS IN]}
   
 \section{Attrition as Seen in Civil Service Workers}
 
-\paragraph{The U.S. Office of Personnel Management (OPM) serves as the central Human Resources department for all Federal agencies, including the management of federal agency health insurance and retirement benefits. Their oversight of policy implementation as well as being a general resource for all agency Human Resource departments makes their employment data of particular interest for this paper. OPM releases on a quarterly basis updated separation data on its over two million federal civil service workers.  We used these anonymized data sets to create a full year of separation data, spanning October 2014 - September 2015.   These data [7], include the following variables: 1) age group, captured categorically in 5 year increments (AGELVL and AGELVLT), 2) agency type and subtype information (AGYTYP, AGYTYPT, AGY, AGYT, AGYSUB, and AGYSUBT), 3) gender (GENDER and GENDERT), 4) General Schedule Grade, or equivalent, dictating salary level (GSEGRD, 5) geographical location of the employee down to the state level (LOCTYP, LOCTYPT, LOC, LOCT), 5)length of service as a government employee captured in one year increments until five years was achieved, then every five after that (LOSLVL and LOSLVLT), 6)occupation type  in regards to white or blue collar, occupation family, and in some cases, down to the particular occupation itself (i.e. "chaplain") (OCCTYP, OCCTYPT, OCCFAM, OCCFAMT, OCC, OCCT), 7) occupation category among seven main categories (i.e. "Technical" and "Clerical")(PATCO and PATCOT), 8) pay plan and grade for both GSE and non-GSE occupations (PPTYP, PPTYPT, PPGROUP, PPGROUPT, PAYPLAN, PAYPLANT, and PPGRD), 9) salary range, captured categorically starting with $<$ \$20,000 and followed in \$10,000 increments (SALLVL and SALLVLT), 10) reason for separation (SEP and SEPT), and 11) type of appointment and worschedules, denoting factors such as permanence, seasonality, and executive status (TOATYP, TOATYPT, TOA, TOAT, WSTYP, WSTYPT, WORKSCH, and WORKSCT).   }
+\paragraph{The U.S. Office of Personnel Management (OPM) serves as the central Human Resources department for all Federal agencies, including the management of federal agency health insurance and retirement benefits. Their oversight of policy implementation as well as being a general resource for all agency Human Resource departments makes their employment data of particular interest for this paper. OPM releases, on a quarterly basis, updated separation data on its over two million federal civil service workers.  We used these anonymized data sets to create a full year of separation data, spanning October 2014 - September 2015.   These data [7], include the following variables: 1) age group, captured categorically in 5 year increments (AGELVL and AGELVLT), 2) agency type and subtype information (AGYTYP, AGYTYPT, AGY, AGYT, AGYSUB, and AGYSUBT), 3) gender (GENDER and GENDERT), 4) General Schedule Grade, or equivalent, dictating salary level (GSEGRD, 5) geographical location of the employee down to the state level (LOCTYP, LOCTYPT, LOC, LOCT), 5)length of service as a government employee captured in one year increments until five years was achieved, then every five after that (LOSLVL and LOSLVLT), 6)occupation type  in regards to white or blue collar, occupation family, and in some cases, down to the particular occupation itself (i.e. "chaplain") (OCCTYP, OCCTYPT, OCCFAM, OCCFAMT, OCC, OCCT), 7) occupation category among seven main categories (i.e. "Technical" and "Clerical")(PATCO and PATCOT), 8) pay plan and grade for both GSE and non-GSE occupations (PPTYP, PPTYPT, PPGROUP, PPGROUPT, PAYPLAN, PAYPLANT, and PPGRD), 9) salary range, captured categorically starting with $<$ \$20,000 and followed in \$10,000 increments (SALLVL and SALLVLT), 10) reason for separation (SEP and SEPT), and 11) type of appointment and worschedules, denoting factors such as permanence, seasonality, and executive status (TOATYP, TOATYPT, TOA, TOAT, WSTYP, WSTYPT, WORKSCH, and WORKSCT).   }
 
 
 \subparagraph{There are certain points worth noting to understand our findings in the correct context.  The General Schedule Pay Scale is the centralized pay scale used by many civil service agencies. Whether or not a person is paid under the GS, the OPM converts the level he or she is paid under to the GS for data collection purposes. The scale numbers 1-15 and there are ten “steps” within each of those levels.  Also, to remain competitive with industry salaries, the GS operates a locality adjustment scale that adds a particular percentage to a person’s salary, based on city of occupation alone.}
@@ -114,7 +115,7 @@
  
 \subparagraph{As indicated in Fig. 3, there are several intuitive observations to be made of the correlation values shared by separation type and the remaining quantitative attributes present in the dataset. Note numerical values shown are Pearson’s correlation coefficient values. Separation due to voluntary retirement (SEP\_SD) is positively correlated with paygrade (r = 0.2), salary differential from the industry (r = 0.3), and length of service (r = 0.6). Even though these are to be expected, this is still worth noting as it supports the idea that the prospect of retiring with benefits, as opposed to quitting, can help entice an employee to stay. Of course, the pension calculation is heavily based on number of years of service, so it is unsurprising that length of service is the highest positively correlated factor for separation by voluntary retirement.}
  
-\subparagraph{The correlation values for separation from quitting (SEP\_SC) in Fig. 3 is what interests us most.  As paygrade decreases, the likelihood of separation by quitting increases (r = 0.2). This make logical sense, as paygrade is directly tied to income.  However, this correlation also exactly matches the correlation for the salary differential from the industry, so there is not enough direction to say that the status of the paygrade is what matters more so than the actual salary. Though not indicated in Fig. 3, salary and paygrade level do in fact strongly correlate with one another (r = 0.9). As such, the two are most likely one and the same in an employee's mind, and only one of the two will be used for modeling purposes.}
+\subparagraph{The correlation values for separation from quitting (SEP\_SC) in Fig. 3 is what interests us most.  As paygrade decreases, the likelihood of separation by quitting increases (r = 0.2). This makes logical sense, as paygrade is directly tied to income.  However, this correlation also exactly matches the correlation for the salary differential from the industry, so there is not enough direction to say that the status of the paygrade is what matters more so than the actual salary. Though not indicated in Fig. 3, salary and paygrade level do in fact strongly correlate with one another (r = 0.9). As such, the two are most likely one and the same in an employee's mind, and only one of the two will be used for modeling purposes.}
  
 \subparagraph{Finally, the correlation of quits to years until retirement eligibility is positively correlated (r = 0.3), whereas it is negatively correlated with length of service (r = -0.4); the further someone is from being able to retire, the more likely they are to quit. But when considering the correlations observed for paygrade and salary differential, a key takeaway is that the job positions for which it is more difficult to replace and train should be assigned higher paygrades and lower income differentials from industry. This conclusion aside, these insights solidified our data as being predictive of attrition.}
 
@@ -140,11 +141,10 @@
 \label{fig:PCA_Scree_CumVar}
 \end{figure}
 
-
+% Comment(Chris): Missing Top 15 Raw Scaled Features within Each PCA Loading here
 \subparagraph{These 22 principal components were utilized both as a dataset of component vectors as well as to identify the top 15 features within each of the 22 component loading magnitudes. The latter approach reduced our inputs to 49 features, allowing only the most important features to proceed into our model as raw scaled values, based on PCA component loadings.}
 
-\subparagraph{Manual Logistic Regression Feature Selection:[CHRIS TO WRITE A PARAGRAPH ON THIS PROCESS, WHAT VALUES ARE ANALYZED{P VALUE, VIF, ETC.}, AND THRESHOLDS FOR REMOVAL.]
-}
+\subparagraph{Manual Logistic Regression Feature Selection: Important independent variables were identified by first assessing multicollinearity and covariance among the 99 raw features, and then iteratively generating logistic regression models - removing one feature at a time with each iteration. Removal criteria were based on Variance Inflation Factor (VIF) values (Threshold for removal was VIF of 10), Null Deviance, Log Likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), and p-values ($\alpha = 5$). Only statistically significant features remained for model input after completing this process (32 variables in total).}
  
 
 \subsection{Classification Model Training and Comparison}
@@ -183,6 +183,91 @@
 \subsection{Feature Importance Analysis}
 
 \paragraph{[CHRIS TO PLACE TEXT HERE.]}
+
+\subparagraph{}
+\begin{figure}
+\centering
+\subfloat[first]{
+  \includegraphics[width=60mm]{Violin_AGELVL_H.pdf}
+}
+\subfloat[second]{
+  \includegraphics[width=60mm]{Violin_AGELVL_G.pdf}
+}
+\hspace{0mm}
+\subfloat[third]{
+  \includegraphics[width=60mm]{Violin_AGELVL_I.pdf}
+}
+\subfloat[fourth]{
+  \includegraphics[width=60mm]{Violin_AGELVL_B.pdf}
+}
+\hspace{0mm}
+\subfloat[fifth]{
+  \includegraphics[width=60mm]{Violin_AGELVL_F.pdf}
+}
+\caption{Violin Plots - Significant Age Levels}
+\label{fig:ViolinAge}
+\end{figure}
+
+\subparagraph{}
+\begin{figure}
+\centering
+\subfloat[first]{
+  \includegraphics[width=60mm]{Violin_LOC_46.pdf}
+}
+\subfloat[second]{
+  \includegraphics[width=60mm]{Violin_LOC_30.pdf}
+}
+\hspace{0mm}
+\subfloat[third]{
+  \includegraphics[width=60mm]{Violin_LOC_04.pdf}
+}
+\subfloat[fourth]{
+  \includegraphics[width=60mm]{Violin_LOC_06.pdf}
+}
+\hspace{0mm}
+\subfloat[fifth]{
+  \includegraphics[width=60mm]{Violin_LOC_20.pdf}
+}
+\caption{Violin Plots - Significant Locations}
+\label{fig:ViolinLoc}
+\end{figure}
+
+\subparagraph{}
+\begin{figure}
+\centering
+\subfloat[first]{
+  \includegraphics[width=60mm]{Violin_TOA_44.pdf}
+}
+\subfloat[second]{
+  \includegraphics[width=60mm]{Violin_TOA_42.pdf}
+}
+\hspace{0mm}
+\subfloat[third]{
+  \includegraphics[width=60mm]{Violin_TOA_20.pdf}
+}
+\subfloat[fourth]{
+  \includegraphics[width=60mm]{Violin_TOA_35.pdf}
+}
+\caption{Violin Plots - Significant Types of Appointment}
+\label{fig:ViolinTOA}
+\end{figure}
+
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{Violin_PPGROUP_11.pdf}
+\caption{Violin Plot - Pay Plan Group 11}
+\label{fig:ViolinPPGROUP}
+\end{figure}
+
+% Comment(Chris): Will likely need to enlarge font size but need to shorten BLS name to do so
+\subparagraph{}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{ScatterMatrix.jpg}
+\caption{Scatter Plot Matrix Results for Top Numeric Attributes}
+\label{fig:ScatterMatrix}
+\end{figure}
 
 
 \subsection{Expanding Testing Scope to Administrative Occupations}
