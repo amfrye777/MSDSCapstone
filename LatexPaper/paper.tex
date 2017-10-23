@@ -149,9 +149,9 @@
 
 \subsection{Classification Model Training and Comparison}
 
-\paragraph{[DISCUSS CV SPLIT FOLDS HERE.....]}
+\paragraph{To train our model, we utilized Stratified K-Fold Cross Validation for our classification analysis, with 5 folds. From our original sample size of 14,920 each fold, or iteration, was split approximately 20\% as test observations utilizing the rest as training observations all while keeping the ratio of classes equal amongst separation types. These folds allowed us to validate that we are not overfitting our model and increase our understanding for whether our model may hold up for external datasets.}
 
-\subparagraph{Among the three model types and four separate input features tested, Logistic Regression with Manual Feature Selection was identified as most effective. As depicted in Table ~\ref{fig:AccTable} the [INTERPRET MODEL MEAN ACCURACY RESULTS HERE]} 
+\subparagraph{Among the three model types and four separate input features tested, Logistic Regression with Manual Feature Selection was identified as having the effective overall accuracy. As depicted in Table ~\ref{fig:AccTable} the winning model produced an average accuracy of 74.484\%, closely followed by Random Forest using the same feature inputs at 73.707\%. while accuracies under 75\% may appear low, } 
 
 \subparagraph{}
 \begin{table}[H]
@@ -168,15 +168,15 @@
 \label{fig:AccPlot}
 \end{figure}
 
-\subparagraph{Furthermore, we may see visually in Figure ~\ref{fig:AccPlot}, the variation in accuracy for each model across the 5 fold tests further supports the Logistic Regression results as a strong selection.[INTERPRET FOLD ACCURACY METRICS HERE, MAKING NOTE THAT LEGEND INDEXES CORRESPOND TO Table ~\ref{fig:AccTable}]}
+\subparagraph{Furthermore, we may see visually in Figure ~\ref{fig:AccPlot}, the variation in accuracy for each model across the 5 fold tests further supports the Logistic Regression results as a strong selection. Legend indexes, matching those found in Table ~\ref{fig:AccTable} show Logistic regression as the winner amongst 3/5 iterations, and a close second only trailing behind 0.5364\% in iteration 3. Interestingly, the disparate feature inputs to the random forest model created vastly different results with top 15 PC features producing very inconsistent results across folds. With large differences in results between the first two folds, we push further into true positive/false positive rates to ensure we don't have too large of inconsistencies in each fold test.}
 
-\subparagraph{[discuss lr roc plot here.....Figure ~\ref{fig:ROCPlot}.]}
+\subparagraph{To assess accuracies of the Logistic Regression model further, we produced a Receiver Operating Characteristic(ROC) Curve plot as may be seen in Figure ~\ref{fig:ROCPlot}. This plot displays the True Positive / False Positive rates across test predictions for each fold. Ideally, we want each iteration to produce a curve reaching as far top left of the plot as possible. These results, although Fold 0 appears to be a very low area curve, it is not overly concerning given there are no unexpected variation in the curve and aligns with our accuracy results reviewed previously. Of our final tests, we push forward with our analysis using the Logistic Regression model with manually selected features.}
 
 \subparagraph{}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{ROCPlot.jpg}
-\caption{Accuracies Across Test Folds for Top 4 Model Results}
+\caption{Logistic Regression Model Train ROC Curve across 5 folds}
 \label{fig:ROCPlot}
 \end{figure}
 
@@ -187,7 +187,7 @@
 
 \subsection{Expanding Testing Scope to Administrative Occupations}
 
-\paragraph{[TEXT PLACEHOLDER FOR RESULTS, APPLYING FINAL MODEL ON ADMINISTRATIVE DATA. INCLUDE COMMENTS ON HOW ONE MODEL DOES OR DOES NOT WORK WELL ACROSS INDUSTRIES. ALSO, PROVIDE RESULTS ON EFFECTIVENESS OF THE MODEL, WHEN OCCUPATION FAMILIES ARE INCLUDED AND A SEPARATE MODEL IS GENERATED FOR EACH POPULATION SEGMENT]. Here is a reference to confus matrix... Figure ~\ref{fig:AdminLRConfus}}
+\paragraph{Training our model once more, utilizing the entire sampled dataset instead of selecting merely one of the 80:20 train:test splits, the model fit was saved for consumption on additional data from the Administrative occupation. This test allows us to assess whether our model holds true across varying occupation families. This model was applied to administrative data, which underwent the same sampling strategy as was performed for professional occupations. As may be seen in Figure ~\ref{fig:AdminLRConfus}, the results are nearly identical to that of the professional training tests. We may see that of all administrative individuals who quit(SC),  we predicted 72\% of them correctly and only 26\% of Non-Separation(NS) individuals were incorrectly associated as likely to quit. Although we have misrepresented these Non-Separation indivisuals, there may be relevance to their prediction. These individuals may be feeling unhappy in the workplace, and a shift from leadership before eruption may help prevent future turnover. Between both the true positive and false positive quit predictions, there could be some value in these insights to an organization. These results could identify a target demographic for further assessment to help understand what action could be taken to help reduce attrition in the workplace. Although this model appears to hold its value across both professional and administrative occupations, one must tread carefully to expand the scope of reach even further. Similar tests and analysis needs conducted for expanding this model's reach past these two groups, as findings may be different for that of blue collar occupations or any others.}
 
 \subparagraph{}
 \begin{figure}[H]
